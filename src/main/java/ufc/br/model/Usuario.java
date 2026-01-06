@@ -73,9 +73,9 @@ public class Usuario {
 
     }
     public void addTrabalho(Usuario newTrabalho) {
-        if (newTrabalho!= null) {
-            listaDeTrabalhos.add(newTrabalho);
-        }
+//        if (newTrabalho!= null) {
+//            listaDeTrabalhos.add(newTrabalho);
+//        }
     }
 
     public String toString() {

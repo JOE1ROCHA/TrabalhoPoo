@@ -1,17 +1,18 @@
 package ufc.br.view;
 
 import ufc.br.controller.NewTrabalhoController;
-import ufc.br.model.Trabalho;
+import ufc.br.model.Model;
+import ufc.br.model.Observer;
 import ufc.br.model.Usuario;
 import java.util.Scanner;
 
-public class NewTrabalhoView {
+public class NewTrabalhoView implements Observer {
     private NewTrabalhoController controller;
-    private Usuario model;
+    private Model model;
     private String descricao;
     private String titulo;
-    private Usuario autor;
-    private Usuario responsavel;
+    private String autor;
+    private String responsavel;
 
     public String getDescricao() {
         return descricao;
@@ -29,28 +30,30 @@ public class NewTrabalhoView {
         this.titulo = titulo;
     }
 
-    public Usuario getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(Usuario autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
-    public Usuario getResponsavel() {
+    public String getResponsavel() {
         return responsavel;
     }
 
-    public void setResponsavel(Usuario responsavel) {
+    public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
     }
 
-    public void init(Usuario model) {
-        this.model = model;
-        controller = new NewTrabalhoController();
-        controller.init(model, this);
-        model.addTrabalho(this);
-        cadastrarTrabalho();
+    public void init(Model model) {
+        if(model!= null) {
+            this.model = model;
+            controller = new NewTrabalhoController();
+            controller.init(model, this);
+            model.attachObserver(this);
+            cadastrarTrabalho();
+        }
     }
 
     public void cadastrarTrabalho() {
@@ -63,12 +66,14 @@ public class NewTrabalhoView {
         System.out.print("Descricao: ");
         descricao = sc.nextLine();
         System.out.print("Autor: ");
-        autor = model.getAutor();
+        autor = sc.nextLine();
         System.out.print("Responsavel: ");
-        responsavel = model.getResponsavel();
+        responsavel = sc.nextLine();
         controller.handleEvent("OK");
-        model.addTrabalho(this);
+        model.detachObserver(this);
     }
+    public void update() {
 
+    }
 
 }

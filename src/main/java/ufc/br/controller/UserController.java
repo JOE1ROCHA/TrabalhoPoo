@@ -2,6 +2,7 @@ package ufc.br.controller;
 
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
+import ufc.br.view.NewTrabalhoView;
 import ufc.br.view.UserView;
 import ufc.br.view.MainView;
 
@@ -35,7 +36,8 @@ public class UserController implements Observer {
                 System.out.println("Ainda nao imprementado");
                 break;
             case "3":
-                System.out.println("Ainda nao imprementado");
+                NewTrabalhoView novoTrabalhoView = new NewTrabalhoView();
+                novoTrabalhoView.init(model);
                 break;    // finalizar sistema
         }
     }
