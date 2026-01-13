@@ -3,8 +3,17 @@ package ufc.br.model;
 public class ItensDeTrabalho {
     private String titulo;
     private String descricao;
-    private Usuario responsavel;
+    private String responsavel;
     private Status status;
+
+    public ItensDeTrabalho() {
+
+    }
+    public ItensDeTrabalho(String titulo, String descricao, String responsavel) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.responsavel = responsavel;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -22,11 +31,11 @@ public class ItensDeTrabalho {
         this.descricao = descricao;
     }
 
-    public Usuario getResponsavel() {
+    public String getResponsavel() {
         return responsavel;
     }
 
-    public void setResponsavel(Usuario responsavel) {
+    public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
     }
 

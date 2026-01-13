@@ -6,18 +6,19 @@ import java.util.List;
 public class Trabalho {
     private String descricao;
     private String titulo;
-    private Usuario autor;
-    private Usuario responsavel;
-    private List<ItensDeTrabalho> listaItensDeTrabalho;
+    private String autor;
+    private String responsavel;
+    private List<ItensDeTrabalho> listaTarefas;
     private Status status;
 
     public Trabalho() {
     }
 
-    public Trabalho(String descricao, Usuario autor, Usuario responsavel) {
+    public Trabalho(String descricao, String autor, String responsavel, String titulo) {
         this.descricao = descricao;
         this.autor = autor;
         this.responsavel = responsavel;
+        this.titulo = titulo;
     }
 
     public Status getStatus() {
@@ -44,27 +45,27 @@ public class Trabalho {
         this.descricao = descricao;
     }
 
-    public List<ItensDeTrabalho> getListaItensDeTrabalho() {
-        return listaItensDeTrabalho;
+    public List<ItensDeTrabalho> getListaTarefas() {
+        return listaTarefas;
     }
 
-    public void setListaItensDeTrabalho(List<ItensDeTrabalho> listaItensDeTrabalho) {
-        this.listaItensDeTrabalho = listaItensDeTrabalho;
+    public void setListaTarefas(List<ItensDeTrabalho> listaTarefas) {
+        this.listaTarefas = listaTarefas;
     }
 
-    public Usuario getResponsavel() {
+    public String getResponsavel() {
         return responsavel;
     }
 
-    public void setResponsavel(Usuario responsavel) {
+    public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
     }
 
-    public Usuario getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(Usuario autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
@@ -72,4 +73,12 @@ public class Trabalho {
 
     }
 
+    @Override
+    public String toString() {
+        return "======================================\n" +
+                "titulo: " + titulo + "\n" +
+                "descricao: " + descricao + "\n" +
+                "autor: " + autor + "\n" +
+                "responsavel: " + responsavel + "\n";
+    }
 }

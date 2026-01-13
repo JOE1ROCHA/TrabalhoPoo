@@ -54,7 +54,6 @@ public class MainView implements Observer {
             String event = sc.nextLine();
             controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
         } while (!finalizar);
-        sc.close();
     }
 
     /*

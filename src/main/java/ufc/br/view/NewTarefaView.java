@@ -1,26 +1,28 @@
 package ufc.br.view;
 
-import ufc.br.controller.NewTrabalhoController;
+import ufc.br.controller.NewTarefaController;
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
-import ufc.br.model.Usuario;
+import ufc.br.model.Status;
+
 import java.util.Scanner;
 
-public class NewTrabalhoView implements Observer {
-    private NewTrabalhoController controller;
+public class NewTarefaView implements Observer {
+    private NewTarefaController controller;
     private Model model;
-    private String descricao;
     private String titulo;
-    private String autor;
+    private String descricao;
     private String responsavel;
+    private boolean status = false;
 
+    public NewTarefaView() {
 
-    public String getDescricao() {
-        return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public NewTarefaView(String titulo, String descricao, String responsavel) {
+        this.titulo = titulo;
         this.descricao = descricao;
+        this.responsavel = responsavel;
     }
 
     public String getTitulo() {
@@ -31,12 +33,12 @@ public class NewTrabalhoView implements Observer {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getResponsavel() {
@@ -50,31 +52,29 @@ public class NewTrabalhoView implements Observer {
     public void init(Model model) {
         if(model!= null) {
             this.model = model;
-            controller = new NewTrabalhoController();
+            controller = new NewTarefaController();
             controller.init(model, this);
             model.attachObserver(this);
-            cadastrarTrabalho();
+            cadastrarTarefa();
         }
     }
 
-    public void cadastrarTrabalho() {
+    public void cadastrarTarefa() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("TELA CADASTRAR TRABALHO");
+        System.out.println("TELA CADASTRAR TAREFA");
         System.out.println("======================");
         System.out.println();
         System.out.print("Titulo: ");
         titulo = sc.nextLine();
         System.out.print("Descricao: ");
         descricao = sc.nextLine();
-        System.out.print("Autor: ");
-        autor = sc.nextLine();
         System.out.print("Responsavel: ");
         responsavel = sc.nextLine();
         controller.handleEvent("OK");
         model.detachObserver(this);
     }
+
     public void update() {
 
     }
-
 }

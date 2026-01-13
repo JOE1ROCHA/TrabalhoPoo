@@ -1,16 +1,15 @@
 package ufc.br.controller;
+
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
-import ufc.br.model.Usuario;
-import ufc.br.model.Trabalho;
-import ufc.br.view.NewTrabalhoView;
-import ufc.br.view.NewUserView;
+import ufc.br.view.NewTarefaView;
+import ufc.br.view.TrabalhosView;
 
-public class NewTrabalhoController implements Observer {
+public class NewTarefaController implements Observer {
     private Model model;
-    private NewTrabalhoView view;
+    private NewTarefaView view;
 
-    public void init(Model model, NewTrabalhoView view) {
+    public void init(Model model, NewTarefaView view) {
         if(model != null && view!= null) {
             this.model = model;
             this.view = view;
@@ -19,7 +18,7 @@ public class NewTrabalhoController implements Observer {
     public void handleEvent(String event) {
         switch (event) {
             case "OK" :
-                model.setTrabalho(view.getDescricao(), view.getAutor(),view.getResponsavel(), view.getTitulo());
+                model.setTarefas(view.getTitulo(),view.getDescricao(),view.getResponsavel());
                 model.detachObserver(this);
                 break;
         }

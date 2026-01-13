@@ -1,5 +1,4 @@
 package ufc.br.view;
-
 import ufc.br.controller.UserController;
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
@@ -50,9 +49,8 @@ public class UserView implements Observer {
             String event = sc.nextLine();
 
             controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
-
         } while (!finalizar);
-        sc.close();
+
     }
 
     /*

@@ -5,7 +5,6 @@ import java.util.List;
 public class Usuario {
     private String nome;
     private String cargo;
-    private List<ItensDeTrabalho> listaItensDeTrabalho;
     private List<Trabalho> listaDeTrabalhos;
     private String login;
     private String senha;
@@ -54,30 +53,17 @@ public class Usuario {
         this.cargo = cargo;
     }
 
-    public List<ItensDeTrabalho> getListaItensDeTrabalho() {
-        return listaItensDeTrabalho;
-    }
-
-    public void setListaItensDeTrabalho(List<ItensDeTrabalho> listaItensDeTrabalho) {
-        this.listaItensDeTrabalho = listaItensDeTrabalho;
-    }
-
-    public List<Trabalho> getListaDeTrabalhos() {
+    public List<Trabalho> getlistaDeTrabalhos() {
         return listaDeTrabalhos;
     }
 
-    public void setListaDeTrabalhos(List<Trabalho> listaDeTrabalhos) {
+    public void setListaItensDeTrabalho(List<Trabalho> listaDeTrabalhos) {
         this.listaDeTrabalhos = listaDeTrabalhos;
     }
+
     public void handleEvent (String event){
 
     }
-    public void addTrabalho(Usuario newTrabalho) {
-//        if (newTrabalho!= null) {
-//            listaDeTrabalhos.add(newTrabalho);
-//        }
-    }
-
     public String toString() {
         return nome + " " + login;
     }
