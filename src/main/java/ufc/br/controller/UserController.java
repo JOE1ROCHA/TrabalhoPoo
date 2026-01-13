@@ -34,8 +34,14 @@ public class UserController implements Observer {
                 view3.init(model);
                 break;
             case "2":
-                TrabalhosView listaTrabalhos = new TrabalhosView();
-                listaTrabalhos.init(model);
+                if(model.getListaTrabalhos(model.getUsuarioAutenticado()).size() > 0) {
+                    TrabalhosView listaTrabalhos = new TrabalhosView();
+                    listaTrabalhos.init(model);
+                }
+                else{
+                    System.out.println("LISTA VAZIA!!");
+                    return;
+                }
                 break;
             case "3":
                 NewTrabalhoView novoTrabalhoView = new NewTrabalhoView();

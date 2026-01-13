@@ -26,32 +26,41 @@ public class TrabalhosView implements Observer {
 
     // lista os trabalhos cadastrados do usuario logado
     public void listarTrabalhos() {
-        ;
+
         String user = model.getUsuarioAutenticado();
         System.out.println("LISTA DE TRABALHOS");
         System.out.println();
         List<Trabalho> listaTrabalhos = model.getListaTrabalhos(user);
-
-        int i = 0;
-        for (Trabalho trabalho : listaTrabalhos) {
-            System.out.println(++i + " - " + trabalho.getTitulo());
+        if(listaTrabalhos== null){
+            System.out.println("Lista vazia");
         }
+        else {
+            int i = 0;
+            for (Trabalho trabalho : listaTrabalhos) {
+                System.out.println(++i + " - " + trabalho.getTitulo());
+            }
 
-        System.out.print("-1 Voltar\n");
-        Scanner sc = new Scanner(System.in);
+            System.out.print("\n[-1] - Voltar\n");
+            Scanner sc = new Scanner(System.in);
 
-        System.out.print("Digite o numero da opcao desejada: ");
-        int opc = sc.nextInt();;
+            System.out.print("Digite o numero da opcao desejada: ");
+            int opc = sc.nextInt();
+            ;
 
-        if (opc == -1) {
-            UserView userview = new UserView();
-            userview.init(model);
-        }
-        else{
+            if (opc == -1) {
+                UserView userview = new UserView();
+                userview.init(model);
+                return;
+            } if (opc < 1 || opc > listaTrabalhos.size()) {
+                System.out.println("Opção inválida.");
+                listarTrabalhos();
+                return;
+            }
             model.setTrabalhoSelecionado(listaTrabalhos.get(opc - 1));
+
+            System.out.println(listaTrabalhos.get(opc - 1));
+            menuPrincipalTrabalho();
         }
-        System.out.println(listaTrabalhos.get(opc - 1));
-        menuPrincipalTrabalho();
     }
 
     public void menuPrincipalTrabalho() {

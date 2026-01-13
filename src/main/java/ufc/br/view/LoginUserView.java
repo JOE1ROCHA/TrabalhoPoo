@@ -3,14 +3,19 @@ package ufc.br.view;
 import ufc.br.controller.LoginUserController;
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
-
 import java.util.Scanner;
+
 
 public class LoginUserView implements Observer {
     private Model model;
     private LoginUserController controller;
     private String login;
     private String senha;
+
+    public void limparTela(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
     public void init(Model model) {
         this.model = model;

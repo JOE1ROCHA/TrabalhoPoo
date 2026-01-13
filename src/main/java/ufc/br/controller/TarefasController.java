@@ -28,7 +28,7 @@ public class TarefasController {
                 listaItens.init(model);
                 break;
             case "2":
-                System.out.println("ainda nao feito");
+                model.removerTarefa(model.getTrabalhoSelecionado().getResponsavel(), model.getTrabalhoSelecionado().getTitulo());
                 break;
         }
     }

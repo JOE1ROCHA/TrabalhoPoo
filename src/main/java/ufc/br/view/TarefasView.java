@@ -33,10 +33,10 @@ public class TarefasView implements Observer {
         System.out.println();
         List<ItensDeTrabalho> listaTarefas = model.getListaTarefas(tituloTrabalho);
 
-        if(listaTarefas == null){
+        if(listaTarefas.size()==0){
             System.out.println("Lista vazia, faca o cadastro\n");
-            NewTarefaView itensTrabalhos = new NewTarefaView();
-            itensTrabalhos.init(model);
+            TrabalhosView listaTrabalhos = new TrabalhosView();
+            listaTrabalhos.init(model);
         }
         else {
             int i = 0;
@@ -44,20 +44,25 @@ public class TarefasView implements Observer {
                 System.out.println(++i + " - " + iten.getTitulo());
             }
 
-            System.out.print("-1 Voltar\n");
+            System.out.print("\n[-1] - Voltar\t[-2] - Cadastrar Nova");
             Scanner sc = new Scanner(System.in);
 
             System.out.print("Digite o numero da opcao desejada: ");
             int opc = sc.nextInt();
 
             if (opc == -1) {
-                TrabalhosView trabalhoView = new TrabalhosView();
-                trabalhoView.init(model);
+                TrabalhosView listaTrabalhos = new TrabalhosView();
+                listaTrabalhos.init(model);
+                return;
             }
-
-            ItensDeTrabalho iten = listaTarefas.get(opc - 1);
-            System.out.println("Descricao: "+iten.getDescricao()+"\nResponsavel: "+iten.getResponsavel());
-            menuPrincipalTarefas();
+            else if(opc==-2){
+                NewTarefaView cadastroTarefa = new NewTarefaView();
+                cadastroTarefa.init(model);
+            }else {
+                ItensDeTrabalho iten = listaTarefas.get(opc - 1);
+                System.out.println("Descricao: " + iten.getDescricao() + "\nResponsavel: " + iten.getResponsavel());
+                menuPrincipalTarefas();
+            }
         }
     }
 

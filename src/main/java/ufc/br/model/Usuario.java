@@ -57,8 +57,10 @@ public class Usuario {
         return listaDeTrabalhos;
     }
 
-    public void setListaItensDeTrabalho(List<Trabalho> listaDeTrabalhos) {
+    public void setListaDeTrabalho(List<Trabalho> listaDeTrabalhos) {
+        if(listaDeTrabalhos!=null){
         this.listaDeTrabalhos = listaDeTrabalhos;
+        }
     }
 
     public void handleEvent (String event){

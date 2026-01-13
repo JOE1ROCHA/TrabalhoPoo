@@ -150,7 +150,7 @@ public class Model {
         this.trabalhoSelecionado = trabalhoSelecionado;
     }
 
-    public List<Trabalho> getListaTrabalhos(String usuario) {
+    public List<Trabalho> getListaTrabalhos(String usuario){
         return mapDeTrabalhos.get(usuario);
     }
 
@@ -173,18 +173,18 @@ public class Model {
         }
     }
 
-    public String removerTrabalho(String autor, String titulo) {
+    public void removerTrabalho(String autor, String titulo) {
         List<Trabalho> listaTrabalhos = getListaTrabalhos(autor);
 
         if (listaTrabalhos != null) {
             for (Trabalho trabalho : listaTrabalhos) {
                 if (trabalho.getTitulo().equals(titulo)) {
                     listaTrabalhos.remove(trabalho);
+                    System.out.println("\nTRABALHO REMOVIDO!!\n");
                     break;
                 }
             }
         }
-        return "trabalho removido";
     }
 
     public List<ItensDeTrabalho> getListaTarefas(String titulotrabalho) {
@@ -195,7 +195,7 @@ public class Model {
         if (responsavel != null && trabalhoSelecionado != null && descricao != null) {
             if (mapDeTarefas.containsKey(trabalhoSelecionado.getTitulo())) {
                 List<ItensDeTrabalho> listaTarefas = mapDeTarefas.get(trabalhoSelecionado.getTitulo());
-                listaTarefas.add(new ItensDeTrabalho(trabalhoSelecionado.getTitulo(), descricao, responsavel));
+                listaTarefas.add(new ItensDeTrabalho(tituloTarefa, descricao, responsavel));
                 mapDeTarefas.put(trabalhoSelecionado.getTitulo(), listaTarefas);
                 notifica();
             } else {
@@ -208,7 +208,7 @@ public class Model {
         }
     }
 
-    public String revomerTarefa(String responsavel, String titulo) {
+    public String removerTarefa(String responsavel, String titulo) {
         List<ItensDeTrabalho> listaTarefas = getListaTarefas(titulo);
 
         if (listaTarefas != null) {
