@@ -7,6 +7,8 @@ import ufc.br.view.TrabalhosView;
 import ufc.br.view.UserView;
 import ufc.br.view.MainView;
 
+import java.util.Scanner;
+
 public class UserController implements Observer {
     private Model model;    // Guarda o modelo a ser utilizado
     private UserView view;    // Guarda a view a ser controlada
@@ -34,13 +36,24 @@ public class UserController implements Observer {
                 view3.init(model);
                 break;
             case "2":
-                if(model.getListaTrabalhos(model.getUsuarioAutenticado()).size() > 0) {
+                if(model.getListaTrabalhos(model.getUsuarioAutenticado()) != null) {
                     TrabalhosView listaTrabalhos = new TrabalhosView();
                     listaTrabalhos.init(model);
                 }
                 else{
-                    System.out.println("LISTA VAZIA!!");
-                    return;
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("AINDA NÃO HÁ TRABALHOS CADASTRADOS !!\n\n");
+                    System.out.println("Deseja fazer o cadastro de um novo trabalho?\n\n [1] - Sim \t\t [2] - nao\n");
+                    System.out.print("Digite a opcao desejada: ");
+                    String opc = sc.nextLine();
+
+                    if(opc.equals("1")){
+                        NewTrabalhoView cadastroTrabalho = new NewTrabalhoView();
+                        cadastroTrabalho.init(model);
+                    }
+                    else {
+                        return;
+                    }
                 }
                 break;
             case "3":

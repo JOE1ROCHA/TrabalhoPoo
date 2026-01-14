@@ -1,5 +1,6 @@
 package ufc.br.controller;
 
+import ufc.br.model.ItensDeTrabalho;
 import ufc.br.model.Model;
 import ufc.br.view.TarefasView;
 
@@ -28,7 +29,7 @@ public class TarefasController {
                 listaItens.init(model);
                 break;
             case "2":
-                model.removerTarefa(model.getTrabalhoSelecionado().getResponsavel(), model.getTrabalhoSelecionado().getTitulo());
+                model.removerTarefa(model.getTrabalhoSelecionado().getTitulo(), model.getTarefaSelecionada().getTitulo());
                 break;
         }
     }

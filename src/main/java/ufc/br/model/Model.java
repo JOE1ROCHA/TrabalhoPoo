@@ -17,6 +17,9 @@ public class Model {
     private HashMap<String, List<ItensDeTrabalho>> mapDeTarefas = new HashMap<String, List<ItensDeTrabalho>>();
     private Usuario usuarioAutenticado;    // Usuário autenticado pelo sistema
     private Trabalho trabalhoSelecionado;    // Usuário autenticado pelo sistema
+    private ItensDeTrabalho tarefaSelecionada;    // Usuário autenticado pelo sistema
+
+
     private ArrayList<Observer> observers = new ArrayList<Observer>(); // Lista de observadores interessados no modelo
 
 
@@ -187,6 +190,14 @@ public class Model {
         }
     }
 
+    public ItensDeTrabalho getTarefaSelecionada() {
+        return tarefaSelecionada;
+    }
+
+    public void setTarefaSelecionada(ItensDeTrabalho tarefaSelecionada) {
+        this.tarefaSelecionada = tarefaSelecionada;
+    }
+
     public List<ItensDeTrabalho> getListaTarefas(String titulotrabalho) {
         return mapDeTarefas.get(titulotrabalho);
     }
@@ -208,17 +219,17 @@ public class Model {
         }
     }
 
-    public String removerTarefa(String responsavel, String titulo) {
-        List<ItensDeTrabalho> listaTarefas = getListaTarefas(titulo);
+    public void removerTarefa(String tituloTrabalho, String titulo) {
+        List<ItensDeTrabalho> listaTarefas = getListaTarefas(tituloTrabalho);
 
         if (listaTarefas != null) {
-            for (ItensDeTrabalho iten : listaTarefas) {
-                if (iten.getTitulo().equals(titulo)) {
-                    listaTarefas.remove(iten);
+            for (ItensDeTrabalho tarefa : listaTarefas) {
+                if (tarefa.getTitulo().equals(titulo)) {
+                    listaTarefas.remove(tarefa);
+                    System.out.println("\nTAREFA REMOVIDA!!\n");
                     break;
                 }
             }
         }
-        return "tarefa removida";
     }
 }

@@ -5,6 +5,7 @@ import ufc.br.model.Usuario;
 import ufc.br.model.Trabalho;
 import ufc.br.view.NewTrabalhoView;
 import ufc.br.view.NewUserView;
+import ufc.br.view.TrabalhosView;
 
 public class NewTrabalhoController implements Observer {
     private Model model;
@@ -21,6 +22,8 @@ public class NewTrabalhoController implements Observer {
             case "OK" :
                 model.setTrabalho(view.getDescricao(), view.getAutor(),view.getResponsavel(), view.getTitulo());
                 model.detachObserver(this);
+                TrabalhosView listaTrabalhos = new TrabalhosView();
+                listaTrabalhos.init(model);
                 break;
         }
     }

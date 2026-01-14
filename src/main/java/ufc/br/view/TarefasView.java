@@ -33,10 +33,21 @@ public class TarefasView implements Observer {
         System.out.println();
         List<ItensDeTrabalho> listaTarefas = model.getListaTarefas(tituloTrabalho);
 
-        if(listaTarefas.size()==0){
-            System.out.println("Lista vazia, faca o cadastro\n");
-            TrabalhosView listaTrabalhos = new TrabalhosView();
-            listaTrabalhos.init(model);
+        if(listaTarefas==null){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("AINDA NÃO HÁ TAREFAS CADASTRADAS NESSE TRABALHO !!\n\n");
+            System.out.println("Deseja fazer o cadastro de uma nova tarefa?\n\n [1] - Sim \t\t [2] - nao\n");
+            System.out.print("Digite a opcao desejada: ");
+            String opc = sc.nextLine();
+
+            if(opc.equals("1")){
+                NewTarefaView cadastroTarefa = new NewTarefaView();
+                cadastroTarefa.init(model);
+            }
+            else {
+                TrabalhosView listaTrabalhos = new TrabalhosView();
+                listaTrabalhos.init(model);
+            }
         }
         else {
             int i = 0;
@@ -44,7 +55,7 @@ public class TarefasView implements Observer {
                 System.out.println(++i + " - " + iten.getTitulo());
             }
 
-            System.out.print("\n[-1] - Voltar\t[-2] - Cadastrar Nova");
+            System.out.print("\n[-1] - Voltar\t[-2] - Cadastrar Tarefa\n");
             Scanner sc = new Scanner(System.in);
 
             System.out.print("Digite o numero da opcao desejada: ");
@@ -59,6 +70,8 @@ public class TarefasView implements Observer {
                 NewTarefaView cadastroTarefa = new NewTarefaView();
                 cadastroTarefa.init(model);
             }else {
+                model.setTarefaSelecionada(listaTarefas.get(opc - 1));
+
                 ItensDeTrabalho iten = listaTarefas.get(opc - 1);
                 System.out.println("Descricao: " + iten.getDescricao() + "\nResponsavel: " + iten.getResponsavel());
                 menuPrincipalTarefas();

@@ -3,6 +3,7 @@ package ufc.br.controller;
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
 import ufc.br.view.NewTarefaView;
+import ufc.br.view.TarefasView;
 import ufc.br.view.TrabalhosView;
 
 public class NewTarefaController implements Observer {
@@ -20,6 +21,8 @@ public class NewTarefaController implements Observer {
             case "OK" :
                 model.setTarefas(view.getTitulo(),view.getDescricao(),view.getResponsavel());
                 model.detachObserver(this);
+                TarefasView listaTarefas = new TarefasView();
+                listaTarefas.init(model);
                 break;
         }
     }
