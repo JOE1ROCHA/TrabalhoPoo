@@ -1,63 +1,63 @@
 package ufc.br.view;
+
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import ufc.br.controller.UserController;
 import ufc.br.model.Model;
-import ufc.br.model.Observer;
 
-import java.util.Scanner;
+public class UserView {
 
-public class UserView implements Observer {
     private Model model;
     private UserController controller;
-    private boolean finalizar = false;
-    private String usuarioLogado;
-    private int totalUsers;
+    private Stage stage;
+    private Scene scene;
+    private VBox root;
 
-    public void finalizarSistema() {
-        finalizar = true;
-    }
+    private Label usuarioLabel;
+    private Button logoutBtn;
+    private Button verTrabalhosBtn;
+    private Button cadastrarTrabalhoBtn;
 
-    /*
-     * Inicialização da view principal
-     */
-    public void init(Model model) {
-        if (model != null) {
-            this.model = model;    // Guarda o modelo
-            controller = new UserController();    // Cria seu controller
-            controller.init(model, this);    // Inicializa o controller
-            model.attachObserver(this);    // Registra a view na lista de observadores do modelo
-            menuPrincipalUser();    // Chama o menu principal
+    public void init(Model model, Stage stage) {
+        if(model != null && stage != null) {
+            this.model = model;
+            this.stage = stage;
+
+            controller = new UserController();
+            controller.init(model, this, stage);
+
+            buildUI();
+
+            stage.setScene(scene);
+            stage.show();
         }
     }
 
-    /*
-     * Menu de opções da tela principal
-     */
-    public void menuPrincipalUser() {
-        Scanner sc = new Scanner(System.in);
-        String opcoes[] = {"[1] - Fazer Logout", "[2] - Ver meus trabalhos", "[3] - Cadastrar novo trabalho"};
-        do {
-            System.out.println("=============================");
-            System.out.println("MENU DE USUARIO");
-            System.out.println();
+    private void buildUI() {
+        root = new VBox(15);
+        root.setAlignment(Pos.CENTER);
 
-            System.out.println();
-            System.out.println(opcoes[0]);
-            System.out.println(opcoes[1]);
-            System.out.println(opcoes[2]);
-            System.out.println();
-            System.out.print("Digite a opcao desejada: ");
-            String event = sc.nextLine();
+        usuarioLabel = new Label("Usuário logado: " + model.getUsuarioLogin());
 
-            controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
-        } while (!finalizar);
+        logoutBtn = new Button("Logout");
+        logoutBtn.setOnAction(e -> controller.handleEvent("LOGOUT"));
 
-    }
+        verTrabalhosBtn = new Button("Ver meus trabalhos");
+        verTrabalhosBtn.setOnAction(e -> controller.handleEvent("TRABALHOS"));
 
-    /*
-     * Chamado quando acontece mudança no modelo e o notifica é acionado
-     */
-    public void update() {
-        totalUsers = model.getTotalUsuarios();
-        usuarioLogado = model.getUsuarioLogin();
+        cadastrarTrabalhoBtn = new Button("Cadastrar novo trabalho");
+        cadastrarTrabalhoBtn.setOnAction(e -> controller.handleEvent("NOVO_TRABALHO"));
+
+        root.getChildren().addAll(usuarioLabel, verTrabalhosBtn, cadastrarTrabalhoBtn, logoutBtn);
+
+        scene = new Scene(root, 400, 300);
+
+        scene.getStylesheets().add(
+                getClass().getResource("/style.css").toExternalForm()
+        );
     }
 }

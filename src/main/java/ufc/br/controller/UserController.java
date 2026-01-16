@@ -1,65 +1,52 @@
 package ufc.br.controller;
 
+import javafx.stage.Stage;
 import ufc.br.model.Model;
-import ufc.br.model.Observer;
 import ufc.br.view.NewTrabalhoView;
 import ufc.br.view.TrabalhosView;
-import ufc.br.view.UserView;
 import ufc.br.view.MainView;
+import ufc.br.view.UserView;
 
-import java.util.Scanner;
+import java.util.List;
 
-public class UserController implements Observer {
-    private Model model;    // Guarda o modelo a ser utilizado
-    private UserView view;    // Guarda a view a ser controlada
+public class UserController {
 
-    public void init(Model model, UserView userView) {
-        if (model != null && userView != null){
+    private Model model;
+    private UserView view;
+    private Stage stage;
+
+    public void init(Model model, UserView view, Stage stage) {
+        if(model != null && view != null && stage != null) {
             this.model = model;
-            this.view = userView;
+            this.view = view;
+            this.stage = stage;
         }
     }
 
-
-    public void update() {
-
-    }
-
-    /*
-     * Utilizado para verificar o que deve ser feito em resposta ao evento que aconteceu na view
-     */
     public void handleEvent(String event) {
-        switch (event) {
-            case "1":
+        switch(event) {
+            case "LOGOUT":
                 model.deslogarUsuario();
-                MainView view3 = new MainView();
-                view3.init(model);
+                MainView mainView = new MainView();
+                mainView.init(model, stage); // <-- passa o Stage atual
                 break;
-            case "2":
-                if(model.getListaTrabalhos(model.getUsuarioAutenticado()) != null) {
-                    TrabalhosView listaTrabalhos = new TrabalhosView();
-                    listaTrabalhos.init(model);
-                }
-                else{
-                    Scanner sc = new Scanner(System.in);
-                    System.out.println("AINDA NÃO HÁ TRABALHOS CADASTRADOS !!\n\n");
-                    System.out.println("Deseja fazer o cadastro de um novo trabalho?\n\n [1] - Sim \t\t [2] - nao\n");
-                    System.out.print("Digite a opcao desejada: ");
-                    String opc = sc.nextLine();
 
-                    if(opc.equals("1")){
-                        NewTrabalhoView cadastroTrabalho = new NewTrabalhoView();
-                        cadastroTrabalho.init(model);
-                    }
-                    else {
-                        return;
-                    }
+            case "TRABALHOS":
+                List<?> trabalhos = model.getListaTrabalhos(model.getUsuarioAutenticado());
+                if(trabalhos != null && !trabalhos.isEmpty()) {
+                    TrabalhosView trabalhosView = new TrabalhosView();
+                    trabalhosView.init(model, stage); // <-- Stage também aqui
+                } else {
+                    NewTrabalhoView newTrabalhoView = new NewTrabalhoView();
+                    newTrabalhoView.init(model, stage);
                 }
                 break;
-            case "3":
+
+            case "NOVO_TRABALHO":
                 NewTrabalhoView novoTrabalhoView = new NewTrabalhoView();
-                novoTrabalhoView.init(model);
-                break;    // finalizar sistema
+                novoTrabalhoView.init(model, stage);
+                break;
+
         }
     }
 }

@@ -1,100 +1,98 @@
 package ufc.br.view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import ufc.br.controller.TarefasController;
 import ufc.br.model.ItensDeTrabalho;
 import ufc.br.model.Model;
-import ufc.br.model.Observer;
-import ufc.br.model.Trabalho;
 
 import java.util.List;
-import java.util.Scanner;
 
-public class TarefasView implements Observer {
+public class TarefasView {
+
     private Model model;
     private TarefasController controller;
-    private String usuarioLogado;
-    private int totalUsers;
+    private Stage stage;
+    private Scene scene;
+    private VBox root;
 
-    public void init(Model model) {
-        if (model != null) {
-            this.model = model;    // Guarda o modelo
-            controller = new TarefasController();    // Cria seu controller
-            controller.init(model, this);    // Inicializa o controller
-            model.attachObserver(this);    // Registra a view na lista de observadores do modelo
-            listarTarefas();    // Chama o menu principal
+    private ListView<String> listView;
+    private Label detalhesLabel;
+    private Button voltarBtn;
+    private Button cadastrarBtn;
+    private Button excluirBtn;
+    private ObservableList<String> tarefasObservable;
+
+    public void init(Model model, Stage stage) {
+        if(model != null && stage != null) {
+            this.model = model;
+            this.stage = stage;
+
+            controller = new TarefasController();
+            controller.init(model, this, stage);
+
+            //model.attachObserver(controller); // controller pode reagir a atualizações
+
+            buildUI();
+            atualizarLista();
+
+            stage.setScene(scene);
+            stage.show();
         }
     }
 
-    // lista os trabalhos cadastrados do usuario logado
-    public void listarTarefas() {
-        ;
-        String tituloTrabalho = model.getTrabalhoSelecionado().getTitulo();
-        System.out.println("LISTA DE TAREFAS");
-        System.out.println();
-        List<ItensDeTrabalho> listaTarefas = model.getListaTarefas(tituloTrabalho);
+    private void buildUI() {
+        root = new VBox(10);
+        root.setAlignment(Pos.CENTER);
 
-        if(listaTarefas==null){
-            Scanner sc = new Scanner(System.in);
-            System.out.println("AINDA NÃO HÁ TAREFAS CADASTRADAS NESSE TRABALHO !!\n\n");
-            System.out.println("Deseja fazer o cadastro de uma nova tarefa?\n\n [1] - Sim \t\t [2] - nao\n");
-            System.out.print("Digite a opcao desejada: ");
-            String opc = sc.nextLine();
+        Label titleLabel = new Label("LISTA DE TAREFAS");
 
-            if(opc.equals("1")){
-                NewTarefaView cadastroTarefa = new NewTarefaView();
-                cadastroTarefa.init(model);
+        listView = new ListView<>();
+        tarefasObservable = FXCollections.observableArrayList(String.valueOf(model.getTrabalhoSelecionado()));
+        listView.setItems(tarefasObservable);
+
+        detalhesLabel = new Label("Selecione uma tarefa para ver detalhes");
+
+        voltarBtn = new Button("Voltar");
+        voltarBtn.setOnAction(e -> controller.handleEvent("VOLTA"));
+
+        cadastrarBtn = new Button("Cadastrar Tarefa");
+        cadastrarBtn.setOnAction(e -> controller.handleEvent("CADASTRAR"));
+
+        excluirBtn = new Button("Excluir Tarefa");
+        excluirBtn.setOnAction(e -> controller.handleEvent("EXCLUIR"));
+
+        // Ao selecionar uma tarefa, mostrar detalhes
+        listView.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
+            int idx = newVal.intValue();
+            if(idx >= 0) {
+                ItensDeTrabalho iten = model.getListaTarefas(model.getTrabalhoSelecionado().getTitulo()).get(idx);
+                model.setTarefaSelecionada(iten);
+                detalhesLabel.setText("Descrição: " + iten.getDescricao() + "\nResponsável: " + iten.getResponsavel());
             }
-            else {
-                TrabalhosView listaTrabalhos = new TrabalhosView();
-                listaTrabalhos.init(model);
-            }
-        }
-        else {
-            int i = 0;
-            for (ItensDeTrabalho iten : listaTarefas) {
-                System.out.println(++i + " - " + iten.getTitulo());
-            }
+        });
 
-            System.out.print("\n[-1] - Voltar\t[-2] - Cadastrar Tarefa\n");
-            Scanner sc = new Scanner(System.in);
+        root.getChildren().addAll(titleLabel, listView, detalhesLabel, cadastrarBtn, excluirBtn, voltarBtn);
 
-            System.out.print("Digite o numero da opcao desejada: ");
-            int opc = sc.nextInt();
+        scene = new Scene(root, 400, 500);
 
-            if (opc == -1) {
-                TrabalhosView listaTrabalhos = new TrabalhosView();
-                listaTrabalhos.init(model);
-                return;
-            }
-            else if(opc==-2){
-                NewTarefaView cadastroTarefa = new NewTarefaView();
-                cadastroTarefa.init(model);
-            }else {
-                model.setTarefaSelecionada(listaTarefas.get(opc - 1));
-
-                ItensDeTrabalho iten = listaTarefas.get(opc - 1);
-                System.out.println("Descricao: " + iten.getDescricao() + "\nResponsavel: " + iten.getResponsavel());
-                menuPrincipalTarefas();
-            }
-        }
+        scene.getStylesheets().add(
+                getClass().getResource("/style.css").toExternalForm()
+        );
     }
 
-    public void menuPrincipalTarefas() {
-        Scanner sc = new Scanner(System.in);
-        String opcoes[] = {"[1] - Voltar", "[2] - Excluir tarefa"};
-
-        System.out.println();
-        System.out.println(opcoes[0]);
-        System.out.println(opcoes[1]);
-        System.out.println();
-        System.out.print("Digite a opcao desejada: ");
-        String event = sc.nextLine();
-
-        controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
-    }
-
-    public void update() {
-        totalUsers = model.getTotalUsuarios();
-        usuarioLogado = model.getUsuarioLogin();
+    public void atualizarLista() {
+        tarefasObservable.clear();
+        List<ItensDeTrabalho> lista = model.getListaTarefas(model.getTrabalhoSelecionado().getTitulo());
+        if(lista != null) {
+            for(ItensDeTrabalho item : lista) {
+                tarefasObservable.add(item.getTitulo());
+            }
+        }
     }
 }

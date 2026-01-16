@@ -1,0 +1,10 @@
+
+{
+  "loginBtn": {"x": 200, "y": 150, "width": 120, "height": 40},
+  "cadastroBtn": {"x": 350, "y": 150, "width": 120, "height": 40},
+  "sairBtn": {"x": 700, "y": 500, "width": 100, "height": 35},
+  "labels": {
+    "title": {"x": 300, "y": 50},
+    "totalUsers": {"x": 350, "y": 100}
+  }
+}

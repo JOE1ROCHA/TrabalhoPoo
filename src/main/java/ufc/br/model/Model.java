@@ -18,7 +18,16 @@ public class Model {
     private Usuario usuarioAutenticado;    // Usuário autenticado pelo sistema
     private Trabalho trabalhoSelecionado;    // Usuário autenticado pelo sistema
     private ItensDeTrabalho tarefaSelecionada;    // Usuário autenticado pelo sistema
+    private String estado;
 
+    public void setEstado(String estado) {
+        this.estado = estado;
+        notifica();
+    }
+
+    public String getEstado() {
+        return estado;
+    }
 
     private ArrayList<Observer> observers = new ArrayList<Observer>(); // Lista de observadores interessados no modelo
 

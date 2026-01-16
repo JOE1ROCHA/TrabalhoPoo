@@ -1,85 +1,96 @@
 package ufc.br.view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import ufc.br.controller.TrabalhosController;
 import ufc.br.model.Model;
-import ufc.br.model.Observer;
 import ufc.br.model.Trabalho;
 
 import java.util.List;
-import java.util.Scanner;
 
-public class TrabalhosView implements Observer {
+public class TrabalhosView {
+
     private Model model;
     private TrabalhosController controller;
-    private String usuarioLogado;
-    private int totalUsers;
+    private Stage stage;
+    private Scene scene;
+    private VBox root;
 
-    public void init(Model model) {
-        if (model != null) {
-            this.model = model;    // Guarda o modelo
-            controller = new TrabalhosController();    // Cria seu controller
-            controller.init(model, this);    // Inicializa o controller
-            model.attachObserver(this);    // Registra a view na lista de observadores do modelo
-            listarTrabalhos();    // Chama o menu principal
+    private ListView<String> listView;
+    private Label detalhesLabel;
+    private Button voltarBtn;
+    private Button verTarefasBtn;
+    private Button excluirBtn;
+    private ObservableList<String> trabalhosObservable;
+
+    public void init(Model model, Stage stage) {
+        if(model != null && stage != null) {
+            this.model = model;
+            this.stage = stage;
+
+            controller = new TrabalhosController();
+            controller.init(model, this, stage);
+
+            buildUI();
+            atualizarLista();
+
+            stage.setScene(scene);
+            stage.show();
         }
     }
 
-    // lista os trabalhos cadastrados do usuario logado
-    public void listarTrabalhos() {
+    private void buildUI() {
+        root = new VBox(10);
+        root.setAlignment(Pos.CENTER);
 
-        String user = model.getUsuarioAutenticado();
-        System.out.println("LISTA DE TRABALHOS");
-        System.out.println();
-        List<Trabalho> listaTrabalhos = model.getListaTrabalhos(user);
-        if(listaTrabalhos== null){
-            System.out.println("Lista vazia");
-        }
-        else {
-            int i = 0;
-            for (Trabalho trabalho : listaTrabalhos) {
-                System.out.println(++i + " - " + trabalho.getTitulo());
+        Label titleLabel = new Label("LISTA DE TRABALHOS");
+
+        listView = new ListView<>();
+        trabalhosObservable = FXCollections.observableArrayList();
+        listView.setItems(trabalhosObservable);
+
+        detalhesLabel = new Label("Selecione um trabalho para ver detalhes");
+
+        voltarBtn = new Button("Voltar");
+        voltarBtn.setOnAction(e -> controller.handleEvent("VOLTA"));
+
+        verTarefasBtn = new Button("Ver Minhas Tarefas");
+        verTarefasBtn.setOnAction(e -> controller.handleEvent("TAREFAS"));
+
+        excluirBtn = new Button("Excluir Trabalho");
+        excluirBtn.setOnAction(e -> controller.handleEvent("EXCLUIR"));
+
+        // Ao selecionar um trabalho, mostra detalhes e define trabalhoSelecionado
+        listView.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
+            int idx = newVal.intValue();
+            if(idx >= 0) {
+                Trabalho trabalho = model.getListaTrabalhos(model.getUsuarioAutenticado()).get(idx);
+                model.setTrabalhoSelecionado(trabalho);
+                detalhesLabel.setText("Título: " + trabalho.getTitulo() + "\nDescrição: " + trabalho.getDescricao());
             }
+        });
 
-            System.out.print("\n[-1] - Voltar\n");
-            Scanner sc = new Scanner(System.in);
+        root.getChildren().addAll(titleLabel, listView, detalhesLabel, verTarefasBtn, excluirBtn, voltarBtn);
 
-            System.out.print("Digite o numero da opcao desejada: ");
-            int opc = sc.nextInt();
-            ;
+        scene = new Scene(root, 400, 500);
 
-            if (opc == -1) {
-                UserView userview = new UserView();
-                userview.init(model);
-                return;
-            } if (opc < 1 || opc > listaTrabalhos.size()) {
-                System.out.println("Opção inválida.");
-                listarTrabalhos();
-                return;
+        scene.getStylesheets().add(
+                getClass().getResource("/style.css").toExternalForm()
+        );
+    }
+
+    public void atualizarLista() {
+        trabalhosObservable.clear();
+        List<Trabalho> lista = model.getListaTrabalhos(model.getUsuarioAutenticado());
+        if(lista != null) {
+            for(Trabalho t : lista) {
+                trabalhosObservable.add(t.getTitulo());
             }
-            model.setTrabalhoSelecionado(listaTrabalhos.get(opc - 1));
-
-            System.out.println(listaTrabalhos.get(opc - 1));
-            menuPrincipalTrabalho();
         }
-    }
-
-    public void menuPrincipalTrabalho() {
-        Scanner sc = new Scanner(System.in);
-        String opcoes[] = {"[1] - Voltar", "[2] - Ver minhas tarefas", "[3] - Excluir trabalho"};
-
-        System.out.println();
-        System.out.println(opcoes[0]);
-        System.out.println(opcoes[1]);
-        System.out.println(opcoes[2]);
-        System.out.println();
-        System.out.print("Digite a opcao desejada: ");
-        String event = sc.nextLine();
-
-        controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
-    }
-
-    public void update() {
-        totalUsers = model.getTotalUsuarios();
-        usuarioLogado = model.getUsuarioLogin();
     }
 }
