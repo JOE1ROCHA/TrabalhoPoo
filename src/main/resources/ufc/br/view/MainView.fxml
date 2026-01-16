@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufc.br.controller.MainController">
     <children>
         <SplitPane focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <items>
@@ -20,7 +20,7 @@
                                     <font>
                                         <Font name="System Bold Italic" size="63.0" fx:id="x1" />
                                     </font></Label>
-                                <Button graphicTextGap="100.0" layoutX="290.0" layoutY="284.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="163.0" text="ENTRAR" textAlignment="CENTER">
+                                <Button graphicTextGap="100.0" layoutX="290.0" layoutY="284.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="163.0" text="ENTRAR" textAlignment="CENTER" onAction="#logar">
                                     <font>
                                         <Font size="16.0" />
                                     </font>

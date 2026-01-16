@@ -37,23 +37,23 @@ public class MainView implements Observer {
      * Menu de opções da tela principal
      */
     public void menuPrincipal() {
-        Scanner sc = new Scanner(System.in);
-        String opcoes[] = {"[1] - Fazer Login", "[2] - Fazer Cadastro", "[3] - Sair"};
-        do {
-            System.out.println("TELA INICIAL DO SISTEMA TESTE");
-            System.out.println("=============================");
-            System.out.println();
-            System.out.println("Total Usuarios: " + totalUsers);
-
-            System.out.println();
-            System.out.println(opcoes[0]);
-            System.out.println(opcoes[1]);
-            System.out.println(opcoes[2]);
-            System.out.println();
-            System.out.print("Digite a opcao desejada: ");
-            String event = sc.nextLine();
-            controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
-        } while (!finalizar);
+//        Scanner sc = new Scanner(System.in);
+//        String opcoes[] = {"[1] - Fazer Login", "[2] - Fazer Cadastro", "[3] - Sair"};
+//        do {
+//            System.out.println("TELA INICIAL DO SISTEMA TESTE");
+//            System.out.println("=============================");
+//            System.out.println();
+//            System.out.println("Total Usuarios: " + totalUsers);
+//
+//            System.out.println();
+//            System.out.println(opcoes[0]);
+//            System.out.println(opcoes[1]);
+//            System.out.println(opcoes[2]);
+//            System.out.println();
+//            System.out.print("Digite a opcao desejada: ");
+//            String event = sc.nextLine();
+//            controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
+//        } while (!finalizar);
     }
 
     /*
