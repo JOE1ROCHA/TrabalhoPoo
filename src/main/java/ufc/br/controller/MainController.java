@@ -1,11 +1,13 @@
 package ufc.br.controller;
 
 
+import javafx.fxml.FXML;
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
 import ufc.br.view.LoginUserView;
 import ufc.br.view.MainView;
 import ufc.br.view.NewUserView;
+import javafx.scene.control.Label;
 
 public class MainController implements Observer {
     private Model model;	// Guarda o modelo a ser utilizado
@@ -26,6 +28,15 @@ public class MainController implements Observer {
      */
     public void update() {
 
+    }
+    @FXML
+    private Label labelTexto;
+
+    @FXML
+    protected void aoClicarBotao() {
+        model.incrementar();
+        // Atualiza a View com o novo dado do Model
+        labelTexto.setText("Contador: " + model.getValor());
     }
 
     /*

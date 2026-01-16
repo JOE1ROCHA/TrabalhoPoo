@@ -25,7 +25,15 @@ public class Model {
 
     private static Model instanciaUnica; // Instância do padrão Singleton
 
+    private int valor = 0;
 
+    public void incrementar() {
+        valor++;
+    }
+
+    public int getValor() {
+        return valor;
+    }
     /*
      * Construtor privado para implementação do padrão de projeto Singleton
      */
