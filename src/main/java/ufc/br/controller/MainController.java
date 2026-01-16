@@ -1,14 +1,18 @@
 package ufc.br.controller;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
-import ufc.br.view.LoginUserView;
 import ufc.br.view.MainView;
-import ufc.br.view.NewUserView;
-import javafx.scene.control.Label;
+
+import java.io.IOException;
 
 public class MainController implements Observer {
     private Model model;	// Guarda o modelo a ser utilizado
@@ -34,10 +38,41 @@ public class MainController implements Observer {
      * Utilizado para verificar o que deve ser feito em resposta ao evento que aconteceu na view
      */
     @FXML
-    protected void logar() {
-        LoginUserView view3 = new LoginUserView(); // ir para tela de login
-        view3.init(model);
-        System.out.println("entrou");
+    protected void logar(ActionEvent event) throws IOException {
+        // 1. Carrega o arquivo FXML da nova tela
+        // Certifique-se de que o caminho está correto (ex: /view/cadastro.fxml)
+        Parent root = FXMLLoader.load(getClass().getResource("/ufc/br/view/LoginUserView.fxml"));
+
+        // 2. Pega o Stage (janela) atual a partir do botão que foi clicado
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // 3. Define a nova cena no Stage
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        scene.getStylesheets().add(
+                getClass().getResource("/css/style.css").toExternalForm()
+        );
+    }
+
+    @FXML
+    protected void cadastroUser(ActionEvent event) throws IOException {
+        // 1. Carrega o arquivo FXML da nova tela
+        // Certifique-se de que o caminho está correto (ex: /view/cadastro.fxml)
+        Parent root = FXMLLoader.load(getClass().getResource("/ufc/br/view/NewUserView.fxml"));
+
+        // 2. Pega o Stage (janela) atual a partir do botão que foi clicado
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // 3. Define a nova cena no Stage
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        scene.getStylesheets().add(
+                getClass().getResource("/css/style.css").toExternalForm()
+        );
     }
 //    public void handleEvent(String event) {
 //        switch (event) {

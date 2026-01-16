@@ -25,7 +25,7 @@
                                         <Font size="16.0" />
                                     </font>
                                 </Button>
-                                <Button layoutX="465.0" layoutY="284.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="157.0" text="CADASTRAR" textAlignment="CENTER">
+                                <Button layoutX="465.0" layoutY="284.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="157.0" text="CADASTRAR" textAlignment="CENTER" onAction="#cadastroUser">
                                     <font>
                                         <Font size="16.0" />
                                     </font>

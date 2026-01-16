@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.PasswordField?>
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufc.br.controller.NewUserController">
     <children>
         <SplitPane focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <items>
@@ -21,25 +22,31 @@
                             </font>
                         </Label>
                         <Button defaultButton="true" layoutX="358.0" layoutY="274.0" mnemonicParsing="false"
-                                prefHeight="59.0" prefWidth="157.0" text="CADASTRAR" textAlignment="CENTER"/>
-                        <TextField alignment="CENTER" layoutX="291.0" layoutY="104.0" prefHeight="26.0"
-                                   prefWidth="316.0" promptText="NOME">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </TextField>
-                        <TextField alignment="CENTER" layoutX="291.0" layoutY="143.0" prefHeight="26.0"
-                                   prefWidth="316.0" promptText="LOGIN">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </TextField>
-                        <TextField alignment="CENTER" layoutX="291.0" layoutY="181.0" prefHeight="26.0"
-                                   prefWidth="316.0" promptText="SENHA">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </TextField>
+                                prefHeight="59.0" prefWidth="157.0" text="CADASTRAR" textAlignment="CENTER" onAction = "#autenticarCadastro"/>
+                        <TextField fx:id="nome"
+                                   alignment="CENTER"
+                                   layoutX="291.0"
+                                   layoutY="104.0"
+                                   prefHeight="26.0"
+                                   prefWidth="316.0"
+                                   promptText="NOME"/>
+
+                        <TextField fx:id="login"
+                                   alignment="CENTER"
+                                   layoutX="291.0"
+                                   layoutY="143.0"
+                                   prefHeight="26.0"
+                                   prefWidth="316.0"
+                                   promptText="LOGIN"/>
+
+                        <PasswordField fx:id="senha"
+                                       alignment="CENTER"
+                                       layoutX="291.0"
+                                       layoutY="181.0"
+                                       prefHeight="26.0"
+                                       prefWidth="316.0"
+                                       promptText="SENHA"/>
+
                     </children>
                 </AnchorPane>
             </items>
