@@ -24,7 +24,7 @@ public class Trabalho {
     }
 
     public float porcentagemConluido() {
-        if (listaTarefas == null) {
+        if (listaTarefas == null||listaTarefas.isEmpty()) {
             return 0;
         }
         float quantConcluidos = 0;

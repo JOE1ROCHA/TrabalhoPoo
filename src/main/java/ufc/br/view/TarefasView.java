@@ -33,7 +33,7 @@ public class TarefasView implements Observer {
         System.out.println();
         List<ItensDeTrabalho> listaTarefas = model.getListaTarefas(tituloTrabalho);
 
-        if(listaTarefas==null){
+        if(listaTarefas==null || listaTarefas.isEmpty()){
             Scanner sc = new Scanner(System.in);
             System.out.println("AINDA NÃO HÁ TAREFAS CADASTRADAS NESSE TRABALHO !!\n\n");
             System.out.println("Deseja fazer o cadastro de uma nova tarefa?\n\n [1] - Sim \t\t [2] - nao\n");

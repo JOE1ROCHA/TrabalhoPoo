@@ -29,8 +29,8 @@ public class Main {
         List<Trabalho> listaTrabalhos = model.getListaTrabalhos("eu");
         model.setTrabalhoSelecionado(listaTrabalhos.getFirst());
         model.setTarefas("Tarefa1", "teste","eu");
-        model.setTarefas("Tarefa2", "teste","eu");
-        model.setTarefas("Tarefa3", "teste","eu");
+//        model.setTarefas("Tarefa2", "teste","eu");
+//        model.setTarefas("Tarefa3", "teste","eu");
         model.setTrabalhoSelecionado(null);
 
     }
