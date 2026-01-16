@@ -29,16 +29,6 @@ public class MainController implements Observer {
     public void update() {
 
     }
-    @FXML
-    private Label labelTexto;
-
-    @FXML
-    protected void aoClicarBotao() {
-        model.incrementar();
-        // Atualiza a View com o novo dado do Model
-        labelTexto.setText("Contador: " + model.getValor());
-    }
-
     /*
      * Utilizado para verificar o que deve ser feito em resposta ao evento que aconteceu na view
      */

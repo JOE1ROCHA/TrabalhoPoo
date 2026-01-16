@@ -9,11 +9,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
-        System.out.println(
-                getClass().getResource("/ufc/br/view/main.fxml")
-        );
-
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/ufc/br/view/MainView.fxml")
         );
@@ -22,6 +17,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setTitle("Kanban");
         stage.show();
+
+        scene.getStylesheets().add(
+                getClass().getResource("/css/style.css").toExternalForm()
+        );
     }
 
     public static void main(String[] args) {
