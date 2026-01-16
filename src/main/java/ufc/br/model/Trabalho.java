@@ -17,10 +17,10 @@ public class Trabalho {
     }
 
     public Trabalho(String descricao, String autor, String responsavel, String titulo) {
-        this.descricao = descricao;
-        this.autor = autor;
-        this.responsavel = responsavel;
-        this.titulo = titulo;
+        setDescricao(descricao);
+        setAutor(autor);
+        setResponsavel(responsavel);
+        setTitulo(titulo);
     }
 
     public float porcentagemConluido() {
@@ -42,7 +42,9 @@ public class Trabalho {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        if(titulo!=null) {
+            this.titulo = titulo;
+        }
     }
 
     public String getDescricao() {
@@ -74,7 +76,9 @@ public class Trabalho {
     }
 
     public void setAutor(String autor) {
-        this.autor = autor;
+        if(autor!=null) {
+            this.autor = autor;
+        }
     }
 
     public void handleEvent(String event) {

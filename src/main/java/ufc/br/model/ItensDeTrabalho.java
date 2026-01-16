@@ -29,7 +29,9 @@ public class ItensDeTrabalho {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        if(titulo!=null) {
+            this.titulo = titulo;
+        }
     }
 
     public String getDescricao() {
