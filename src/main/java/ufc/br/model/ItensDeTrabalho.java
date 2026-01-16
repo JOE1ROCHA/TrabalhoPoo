@@ -4,15 +4,24 @@ public class ItensDeTrabalho {
     private String titulo;
     private String descricao;
     private String responsavel;
-    private Status status;
-
+    private boolean finalizado;
     public ItensDeTrabalho() {
 
     }
     public ItensDeTrabalho(String titulo, String descricao, String responsavel) {
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.responsavel = responsavel;
+        setTitulo(titulo);
+        setDescricao(descricao);
+        setResponsavel(responsavel);
+        this.finalizado = false;
+    }
+
+    public void atualizarStatus(){
+        finalizado =!finalizado;
+    }
+
+    public boolean isFinalizado() {
+
+        return finalizado;
     }
 
     public String getTitulo() {
@@ -39,11 +48,4 @@ public class ItensDeTrabalho {
         this.responsavel = responsavel;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 }

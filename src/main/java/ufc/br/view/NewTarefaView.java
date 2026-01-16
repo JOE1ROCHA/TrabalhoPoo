@@ -3,7 +3,6 @@ package ufc.br.view;
 import ufc.br.controller.NewTarefaController;
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
-import ufc.br.model.Status;
 
 import java.util.Scanner;
 
@@ -13,7 +12,7 @@ public class NewTarefaView implements Observer {
     private String titulo;
     private String descricao;
     private String responsavel;
-    private boolean status = false;
+    private boolean status;
 
     public NewTarefaView() {
 

@@ -37,7 +37,7 @@ public class TrabalhosView implements Observer {
         else {
             int i = 0;
             for (Trabalho trabalho : listaTrabalhos) {
-                System.out.println(++i + " - " + trabalho.getTitulo());
+                System.out.printf("%d - %s %.1f%% Concluido%n",++i,trabalho.getTitulo(),trabalho.porcentagemConluido());
             }
 
             System.out.print("\n[-1] - Voltar\n");

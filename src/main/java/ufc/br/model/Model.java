@@ -208,11 +208,13 @@ public class Model {
                 List<ItensDeTrabalho> listaTarefas = mapDeTarefas.get(trabalhoSelecionado.getTitulo());
                 listaTarefas.add(new ItensDeTrabalho(tituloTarefa, descricao, responsavel));
                 mapDeTarefas.put(trabalhoSelecionado.getTitulo(), listaTarefas);
+                trabalhoSelecionado.setListaTarefas(listaTarefas);
                 notifica();
             } else {
                 List<ItensDeTrabalho> listaTarefas = new ArrayList();
                 listaTarefas.add(new ItensDeTrabalho(tituloTarefa, descricao, responsavel));
                 mapDeTarefas.put(trabalhoSelecionado.getTitulo(), listaTarefas);
+                trabalhoSelecionado.setListaTarefas(listaTarefas);
                 notifica();
 
             }
