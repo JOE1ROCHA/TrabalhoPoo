@@ -1,6 +1,8 @@
 package ufc.br.model;
+
 import ufc.br.view.NewTrabalhoView;
 import ufc.br.model.Usuario;
+
 import java.util.List;
 
 public class Trabalho {
@@ -9,24 +11,30 @@ public class Trabalho {
     private String autor;
     private String responsavel;
     private List<ItensDeTrabalho> listaTarefas;
-    private Status status;
+    private boolean status;
 
     public Trabalho() {
     }
 
     public Trabalho(String descricao, String autor, String responsavel, String titulo) {
-        this.descricao = descricao;
-        this.autor = autor;
-        this.responsavel = responsavel;
-        this.titulo = titulo;
+        setDescricao(descricao);
+        setAutor(autor);
+        setResponsavel(responsavel);
+        setTitulo(titulo);
     }
 
-    public Status getStatus() {
-        return status;
-    }
+    public float porcentagemConluido() {
+        if (listaTarefas == null||listaTarefas.isEmpty()) {
+            return 0;
+        }
+        float quantConcluidos = 0;
 
-    public void setStatus(Status status) {
-        this.status = status;
+        for (ItensDeTrabalho iten : listaTarefas) {
+            if (iten.isFinalizado()) {
+                quantConcluidos++;
+            }
+        }
+        return (quantConcluidos / listaTarefas.size())*100;
     }
 
     public String getTitulo() {
@@ -34,7 +42,9 @@ public class Trabalho {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        if(titulo!=null) {
+            this.titulo = titulo;
+        }
     }
 
     public String getDescricao() {
@@ -66,10 +76,12 @@ public class Trabalho {
     }
 
     public void setAutor(String autor) {
-        this.autor = autor;
+        if(autor!=null) {
+            this.autor = autor;
+        }
     }
 
-    public void handleEvent (String event){
+    public void handleEvent(String event) {
 
     }
 

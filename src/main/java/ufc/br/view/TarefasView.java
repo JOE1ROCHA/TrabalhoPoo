@@ -33,7 +33,7 @@ public class TarefasView implements Observer {
         System.out.println();
         List<ItensDeTrabalho> listaTarefas = model.getListaTarefas(tituloTrabalho);
 
-        if(listaTarefas==null){
+        if(listaTarefas==null || listaTarefas.isEmpty()){
             Scanner sc = new Scanner(System.in);
             System.out.println("AINDA NÃO HÁ TAREFAS CADASTRADAS NESSE TRABALHO !!\n\n");
             System.out.println("Deseja fazer o cadastro de uma nova tarefa?\n\n [1] - Sim \t\t [2] - nao\n");
@@ -52,7 +52,7 @@ public class TarefasView implements Observer {
         else {
             int i = 0;
             for (ItensDeTrabalho iten : listaTarefas) {
-                System.out.println(++i + " - " + iten.getTitulo());
+                System.out.println(++i + " - " + iten.getTitulo()+" "+iten.isFinalizado());
             }
 
             System.out.print("\n[-1] - Voltar\t[-2] - Cadastrar Tarefa\n");
@@ -66,7 +66,7 @@ public class TarefasView implements Observer {
                 listaTrabalhos.init(model);
                 return;
             }
-            else if(opc==-2){
+            else if(opc==-2) {
                 NewTarefaView cadastroTarefa = new NewTarefaView();
                 cadastroTarefa.init(model);
             }else {
@@ -81,11 +81,12 @@ public class TarefasView implements Observer {
 
     public void menuPrincipalTarefas() {
         Scanner sc = new Scanner(System.in);
-        String opcoes[] = {"[1] - Voltar", "[2] - Excluir tarefa"};
+        String opcoes[] = {"[1] - Voltar", "[2] - Excluir tarefa","[3] - Finalizar"};
 
         System.out.println();
         System.out.println(opcoes[0]);
         System.out.println(opcoes[1]);
+        System.out.println(opcoes[2]);
         System.out.println();
         System.out.print("Digite a opcao desejada: ");
         String event = sc.nextLine();

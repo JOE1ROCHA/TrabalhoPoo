@@ -31,6 +31,11 @@ public class TarefasController {
             case "2":
                 model.removerTarefa(model.getTrabalhoSelecionado().getTitulo(), model.getTarefaSelecionada().getTitulo());
                 break;
+            case "3":
+                model.getTarefaSelecionada().atualizarStatus();
+                TarefasView listaIten = new TarefasView();
+                listaIten.init(model);
+                break;
         }
     }
 }
