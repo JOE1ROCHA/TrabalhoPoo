@@ -5,35 +5,35 @@
 <?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufc.br.controller.LoginUserController">
-  <children>
-    <SplitPane focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <items>
-        <AnchorPane>
-          <children>
-            <Label alignment="CENTER" layoutX="355.0" layoutY="36.0" style="&#10;" text="TELA LOGIN" textAlignment="CENTER" wrapText="false">
-                     <font>
-                <Font name="System Bold" size="31.0" fx:id="x1" />
-                     </font></Label>
-                  <Label layoutX="226.0" layoutY="220.0" prefHeight="31.0" prefWidth="91.0" text="LOGIN: ">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="226.0" layoutY="283.0" prefHeight="31.0" prefWidth="91.0" text="SENHA: ">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <PasswordField alignment="CENTER" layoutX="324.0" layoutY="281.0" prefHeight="31.0" prefWidth="325.0" promptText="SENHA" />
-                  <TextField alignment="CENTER" layoutX="324.0" layoutY="220.0" prefHeight="31.0" prefWidth="325.0" promptText="LOGIN" />
-                  <Button defaultButton="true" layoutX="441.0" layoutY="342.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="91.0" text="ENTRAR" textAlignment="CENTER"
-                          onAction="#autenticarLogin">
-                     <font>
-                        <Font size="12.0" />
-                     </font></Button>
-          </children>
-        </AnchorPane>
-      </items>
-    </SplitPane>
-  </children>
+    <children>
+        <SplitPane focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+            <items>
+                <AnchorPane>
+                    <children>
+                        <Label alignment="CENTER" layoutX="355.0" layoutY="36.0" style="&#10;" text="TELA LOGIN" textAlignment="CENTER" wrapText="false">
+                            <font>
+                                <Font name="System Bold" size="31.0" fx:id="x1" />
+                            </font></Label>
+                        <Label layoutX="226.0" layoutY="220.0" prefHeight="31.0" prefWidth="91.0" text="LOGIN: ">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="226.0" layoutY="283.0" prefHeight="31.0" prefWidth="91.0" text="SENHA: ">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="login" alignment="CENTER" layoutX="324.0" layoutY="220.0" prefHeight="31.0" prefWidth="325.0" promptText="LOGIN" />
+                        <PasswordField fx:id="senha" alignment="CENTER" layoutX="324.0" layoutY="281.0" prefHeight="31.0" prefWidth="325.0" promptText="SENHA" />
+                        <Button defaultButton="true" layoutX="441.0" layoutY="342.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="91.0" text="ENTRAR" textAlignment="CENTER"
+                                onAction="#autenticarLogin">
+                            <font>
+                                <Font size="12.0" />
+                            </font></Button>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </VBox>

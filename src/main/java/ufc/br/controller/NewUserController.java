@@ -22,14 +22,15 @@ public class NewUserController implements Observer {
 
     @FXML
     private PasswordField senha;
-//    private LoginUserView view;
+    //    private LoginUserView view;
     @FXML
     private TextField nome;
 
-    public void init(Model model, NewUserView view) {
-        this.model = model;
-        this.view = view;
-        model.attachObserver(this);
+    @FXML
+    public void initialize() {
+        Model modelo = Model.getInstancia();
+        String logado = modelo.getUsuarioAutenticado();
+
     }
 
     private void cadastroUser(ActionEvent event) throws IOException {
@@ -56,9 +57,33 @@ public class NewUserController implements Observer {
     }
     public void update() {
     }
+
     @FXML
-    public void autenticarCadastro(ActionEvent event) throws IOException{
-        model.setUsuario(nome.getText(), login.getText(),senha.getText());
-        cadastroUser(event);
+    public void autenticarCadastro(ActionEvent event) throws IOException {
+        // 1. Captura os dados digitados na tela
+        String nomeUsuario = nome.getText();
+        String loginUsuario = login.getText();
+        String senhaUsuario = senha.getText();
+
+        // 2. Envia para o Model (que está na memória)
+        Model.getInstancia().setUsuario(nomeUsuario, loginUsuario, senhaUsuario);
+
+        // 3. Feedback visual (Opcional, mas recomendado)
+        System.out.println("Usuário " + loginUsuario + " cadastrado com sucesso!");
+
+        // 4. Redireciona para a tela de Login
+        irParaTelaDeLogin(event);
+    }
+
+    private void irParaTelaDeLogin(ActionEvent event) throws IOException {
+        // Carrega o FXML do Login
+        Parent root = FXMLLoader.load(getClass().getResource("/ufc/br/view/LoginUserView.fxml"));
+
+        // Identifica a janela atual (Stage)
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Troca o conteúdo da janela
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

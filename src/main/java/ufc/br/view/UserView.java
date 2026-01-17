@@ -23,7 +23,7 @@ public class UserView implements Observer {
         if (model != null) {
             this.model = model;    // Guarda o modelo
             controller = new UserController();    // Cria seu controller
-            controller.init(model, this);    // Inicializa o controller
+            //controller.init(model, this);    // Inicializa o controller
             model.attachObserver(this);    // Registra a view na lista de observadores do modelo
             menuPrincipalUser();    // Chama o menu principal
         }
@@ -48,7 +48,7 @@ public class UserView implements Observer {
             System.out.print("Digite a opcao desejada: ");
             String event = sc.nextLine();
 
-            controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
+            //controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
         } while (!finalizar);
 
     }

@@ -20,7 +20,6 @@ public class LoginUserView implements Observer {
     public void init(Model model) {
         this.model = model;
         controller = new LoginUserController();
-        controller.init(model, this);
         model.attachObserver(this);
         logarUsuario();
     }

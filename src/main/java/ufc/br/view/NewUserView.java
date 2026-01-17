@@ -19,7 +19,7 @@ public class NewUserView implements Observer {
     public void init(Model model) {
         this.model = model;
         controller = new NewUserController();
-        controller.init(model, this);
+        //controller.init(model, this);
         model.attachObserver(this);
         cadastrarUsuario();
     }
