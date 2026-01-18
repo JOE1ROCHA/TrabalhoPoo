@@ -33,7 +33,7 @@ public class LoginUserView implements Observer {
         login = sc.nextLine();
         System.out.print("Senha: ");
         senha = sc.nextLine();
-        controller.handleEvent("OK");
+        //controller.handleEvent("OK");
         model.detachObserver(this);
     }
 
