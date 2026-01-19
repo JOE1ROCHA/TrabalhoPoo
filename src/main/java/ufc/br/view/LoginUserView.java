@@ -45,6 +45,7 @@ public class LoginUserView implements Observer {
         return senha;
     }
 
+
     public void update() {
 
     }

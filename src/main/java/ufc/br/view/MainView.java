@@ -55,7 +55,6 @@ public class MainView implements Observer {
 //            controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
 //        } while (!finalizar);
     }
-
     /*
      * Chamado quando acontece mudança no modelo e o notifica é acionado
      */

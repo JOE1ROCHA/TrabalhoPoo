@@ -167,7 +167,7 @@ public class Model {
 
     public void setTrabalho(String descricao, String autor, String responsavel, String titulo) {
         if (usuarios.containsKey(autor)) {
-            if (descricao != null && autor != null && responsavel != null && titulo != null) {
+            if (descricao != null && titulo != null) {
                 if (mapDeTrabalhos.containsKey(autor)) {
                     List<Trabalho> listaTrabalhos = mapDeTrabalhos.get(autor);
                     listaTrabalhos.add(new Trabalho(descricao, autor, responsavel, titulo));

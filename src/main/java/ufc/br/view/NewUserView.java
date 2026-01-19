@@ -51,6 +51,7 @@ public class NewUserView implements Observer {
         return senha;
     }
 
+
     public void update() {
 
     }

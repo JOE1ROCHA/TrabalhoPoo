@@ -53,7 +53,7 @@ public class UserView implements Observer {
 
     }
 
-    /*
+ /*
      * Chamado quando acontece mudança no modelo e o notifica é acionado
      */
     public void update() {

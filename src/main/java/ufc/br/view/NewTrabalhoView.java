@@ -51,7 +51,7 @@ public class NewTrabalhoView implements Observer {
         if(model!= null) {
             this.model = model;
             controller = new NewTrabalhoController();
-            controller.init(model, this);
+            //controller.init(model, this);
             model.attachObserver(this);
             cadastrarTrabalho();
         }
@@ -73,6 +73,7 @@ public class NewTrabalhoView implements Observer {
         controller.handleEvent("OK");
         model.detachObserver(this);
     }
+
     public void update() {
 
     }

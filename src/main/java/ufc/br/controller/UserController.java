@@ -25,18 +25,19 @@ public class UserController implements Observer {
     @FXML
     public void irParaListaTrabalhos(ActionEvent event) throws IOException {
         // Verifica se há trabalhos antes de mudar de tela
-        if (model.getListaTrabalhos(model.getUsuarioAutenticado()) != null &&
-                !model.getListaTrabalhos(model.getUsuarioAutenticado()).isEmpty()) {
-
-            navegar(event, "/ufc/br/view/TrabalhosView.fxml");
-        } else {
-            // Substitui o Scanner por um Alerta do JavaFX
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Informação");
-            alert.setHeaderText(null);
-            alert.setContentText("Ainda não há trabalhos cadastrados!");
-            alert.showAndWait();
-        }
+//        if (model.getListaTrabalhos(model.getUsuarioAutenticado()) != null &&
+//                !model.getListaTrabalhos(model.getUsuarioAutenticado()).isEmpty()) {
+//
+//            navegar(event, "/ufc/br/view/TrabalhosView.fxml");
+//        } else {
+//            // Substitui o Scanner por um Alerta do JavaFX
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Informação");
+//            alert.setHeaderText(null);
+//            alert.setContentText("Ainda não há trabalhos cadastrados!");
+//            alert.showAndWait();
+//        }
+        navegar(event, "/ufc/br/view/TrabalhosView.fxml");
     }
 
     @FXML

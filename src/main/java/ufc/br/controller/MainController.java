@@ -26,9 +26,7 @@ public class MainController implements Observer {
             this.model = model;  // Guarda o modelo
             this.view = view;	 // Guarda a view
         }
-    }
-
-    /*
+    }    /*
      * O controller só implementa o update se for necessário
      */
     public void update() {

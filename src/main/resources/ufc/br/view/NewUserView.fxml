@@ -21,8 +21,12 @@
                                 <Font name="System Bold" size="31.0" fx:id="x1"/>
                             </font>
                         </Label>
-                        <Button defaultButton="true" layoutX="358.0" layoutY="274.0" mnemonicParsing="false"
-                                prefHeight="59.0" prefWidth="157.0" text="CADASTRAR" textAlignment="CENTER" onAction = "#autenticarCadastro"/>
+                        <Button defaultButton="true"
+                                layoutX="358.0" layoutY="274.0"
+                                mnemonicParsing="false"
+                                prefHeight="59.0" prefWidth="157.0"
+                                text="CADASTRAR" textAlignment="CENTER"
+                                onAction = "#autenticarCadastro"/>
                         <TextField fx:id="nome"
                                    alignment="CENTER"
                                    layoutX="291.0"
