@@ -10,13 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
-import ufc.br.view.NewTrabalhoView;
-import ufc.br.view.TrabalhosView;
 import ufc.br.view.UserView;
-import ufc.br.view.MainView;
-
 import java.io.IOException;
-import java.util.Scanner;
 
 public class UserController implements Observer {
     private Model model = Model.getInstancia();   // Guarda o modelo a ser utilizado
@@ -24,19 +19,19 @@ public class UserController implements Observer {
 
     @FXML
     public void irParaListaTrabalhos(ActionEvent event) throws IOException {
-        // Verifica se há trabalhos antes de mudar de tela
-//        if (model.getListaTrabalhos(model.getUsuarioAutenticado()) != null &&
-//                !model.getListaTrabalhos(model.getUsuarioAutenticado()).isEmpty()) {
-//
-//            navegar(event, "/ufc/br/view/TrabalhosView.fxml");
-//        } else {
-//            // Substitui o Scanner por um Alerta do JavaFX
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Informação");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Ainda não há trabalhos cadastrados!");
-//            alert.showAndWait();
-//        }
+         //Verifica se há trabalhos antes de mudar de tela
+        if (model.getListaTrabalhos(model.getUsuarioAutenticado()) != null &&
+                !model.getListaTrabalhos(model.getUsuarioAutenticado()).isEmpty()) {
+
+            navegar(event, "/ufc/br/view/TrabalhosView.fxml");
+        } else {
+            // Substitui o Scanner por um Alerta do JavaFX
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informação");
+            alert.setHeaderText(null);
+            alert.setContentText("Ainda não há trabalhos cadastrados!");
+            alert.showAndWait();
+        }
         navegar(event, "/ufc/br/view/TrabalhosView.fxml");
     }
 

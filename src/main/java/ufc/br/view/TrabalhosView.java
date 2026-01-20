@@ -18,7 +18,7 @@ public class TrabalhosView implements Observer {
         if (model != null) {
             this.model = model;    // Guarda o modelo
             controller = new TrabalhosController();    // Cria seu controller
-            controller.init(model, this);    // Inicializa o controller
+            //controller.init(model, this);    // Inicializa o controller
             model.attachObserver(this);    // Registra a view na lista de observadores do modelo
             listarTrabalhos();    // Chama o menu principal
         }

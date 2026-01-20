@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane style="-fx-background-color: white;" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufc.br.controller.TrabalhosController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="752.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ufc.br.controller.TrabalhosController">
    <children>
-      <Label layoutX="241.0" layoutY="80.0" text=" TRABALHOS">
+      <Label layoutX="241.0" layoutY="24.0" text=" TRABALHOS">
          <font>
             <Font name="System Bold Italic" size="47.0" />
          </font>
       </Label>
+      <ListView fx:id="listTrabalhos" layoutX="35.0" layoutY="98.0" opacity="1.0" prefHeight="410.0" prefWidth="220.0" />
    </children>
 </Pane>
