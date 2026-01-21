@@ -75,7 +75,7 @@ public class TrabalhosView implements Observer {
         System.out.print("Digite a opcao desejada: ");
         String event = sc.nextLine();
 
-        controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
+       // controller.handleEvent(event); // Repassa o evento (opção digitada) para o controller
     }
 
     public void update() {

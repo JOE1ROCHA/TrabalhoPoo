@@ -1,6 +1,7 @@
 package ufc.br.controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -13,11 +14,13 @@ import ufc.br.model.Model;
 import ufc.br.model.Trabalho;
 import ufc.br.view.TrabalhosView;
 
+import java.util.List;
+
 public class TrabalhosController {
     private Model model = Model.getInstancia();    // Guarda o modelo a ser utilizado
     private TrabalhosView view;    // Guarda a view a ser controlada
 
-    public TrabalhosController(){
+    public TrabalhosController() {
 
     }
 
@@ -37,6 +40,7 @@ public class TrabalhosController {
             // Conteúdo expandido
             private final ListView<ItensDeTrabalho> listaTarefas = new ListView<>();
             private final VBox container = new VBox(5);
+            private final Label labelVazio = new Label("Nenhuma tarefa cadastrada");
 
             private boolean expandido = false;
 
@@ -51,6 +55,10 @@ public class TrabalhosController {
                 // Lista interna
                 listaTarefas.setPrefHeight(120);
 
+                // Label de lista vazia
+                labelVazio.setStyle("-fx-text-fill: white; -fx-font-style: italic;");
+                labelVazio.setPadding(new Insets(5, 0, 5, 10));
+
                 // Container principal
                 container.getChildren().add(header);
 
@@ -61,13 +69,20 @@ public class TrabalhosController {
                 });
             }
 
+
             private void atualizarVisibilidade() {
                 if (expandido) {
-                    if (!container.getChildren().contains(listaTarefas)) {
+                    container.getChildren().remove(listaTarefas);
+                    container.getChildren().remove(labelVazio);
+
+                    if (listaTarefas.getItems().isEmpty()) {
+                        container.getChildren().add(labelVazio);
+                    } else {
                         container.getChildren().add(listaTarefas);
                     }
                 } else {
                     container.getChildren().remove(listaTarefas);
+                    container.getChildren().remove(labelVazio);
                 }
             }
 
@@ -76,34 +91,39 @@ public class TrabalhosController {
                 super.updateItem(trabalho, empty);
 
                 if (empty || trabalho == null) {
-                    setGraphic(null);
-                } else {
-                    labelTitulo.setText(trabalho.getTitulo());
-                    progressBar.setProgress(trabalho.porcentagemConluido());
-
-                    // alimenta a lista de itens do trabalho
-                    listaTarefas.getItems().setAll(trabalho.getListaTarefas());
-
-                    expandido = false;
-                    atualizarVisibilidade();
-
                     setText(null);
-                    setGraphic(container);
+                    setGraphic(null);
+                    return;
                 }
+
+                labelTitulo.setText(trabalho.getTitulo());
+
+                // ProgressBar espera valor de 0.0 a 1.0
+                progressBar.setProgress(trabalho.porcentagemConluido() / 100.0);
+
+                listaTarefas.getItems().setAll(
+                        trabalho.getListaTarefas() == null
+                                ? List.of()
+                                : trabalho.getListaTarefas()
+                );
+
+                expandido = false;
+                atualizarVisibilidade();
+
+                setText(null);
+                setGraphic(container);
             }
+
+
         });
 
-        listTrabalhos.getItems()
-                .addAll(model.getListaTrabalhos(model.getUsuarioAutenticado()));
+        listTrabalhos.getItems().addAll(model.getListaTrabalhos(model.getUsuarioAutenticado()));
     }
-
-
 
     public void trabalhoSelecionado() {
         listTrabalhos.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && event.isPrimaryButtonDown()) {
-                Trabalho selecionado =
-                        listTrabalhos.getSelectionModel().getSelectedItem();
+                Trabalho selecionado = listTrabalhos.getSelectionModel().getSelectedItem();
 
                 if (selecionado != null) {
                     System.out.println("Selecionado: " + selecionado.getTitulo());
@@ -116,24 +136,5 @@ public class TrabalhosController {
 
     public void update() {
 
-    }
-
-    /*
-     * Utilizado para verificar o que deve ser feito em resposta ao evento que aconteceu na view
-     */
-    public void handleEvent(String event) {
-        switch (event) {
-//            case "1":
-//                TrabalhosView listaTrabalhos = new TrabalhosView();
-//                listaTrabalhos.init(model);
-//                break;
-//            case "2":
-//                TarefasView itensTrabalhos = new TarefasView();
-//                itensTrabalhos.init(model);
-//                break;
-//            case "3":
-//                model.removerTrabalho(model.getUsuarioAutenticado(), model.getTrabalhoSelecionado().getTitulo());
-//                break;    // finalizar sistema
-        }
     }
 }
