@@ -3,6 +3,7 @@ package ufc.br.model;
 import ufc.br.view.NewTrabalhoView;
 import ufc.br.model.Usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Trabalho {
@@ -11,30 +12,29 @@ public class Trabalho {
     private String autor;
     private String responsavel;
     private List<ItensDeTrabalho> listaTarefas;
-    private boolean status;
 
     public Trabalho() {
+        this.listaTarefas = new ArrayList<>();
     }
 
     public Trabalho(String descricao, String autor, String responsavel, String titulo) {
+        this.listaTarefas = new ArrayList<>();
         setDescricao(descricao);
         setAutor(autor);
         setResponsavel(responsavel);
         setTitulo(titulo);
     }
 
-    public float porcentagemConluido() {
-        if (listaTarefas == null||listaTarefas.isEmpty()) {
-            return 0;
+    public double porcentagemConluido() {
+        if (listaTarefas == null || listaTarefas.isEmpty()) {
+            return 0.0;
         }
-        float quantConcluidos = 0;
 
-        for (ItensDeTrabalho iten : listaTarefas) {
-            if (iten.isFinalizado()) {
-                quantConcluidos++;
-            }
-        }
-        return (quantConcluidos / listaTarefas.size())*100;
+        long concluidos = listaTarefas.stream()
+                .filter(ItensDeTrabalho::isFinalizado)
+                .count();
+
+        return (double) concluidos / listaTarefas.size(); // 0.0 a 1.0
     }
 
     public String getTitulo() {

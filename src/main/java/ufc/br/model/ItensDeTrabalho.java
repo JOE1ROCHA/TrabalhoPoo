@@ -5,6 +5,7 @@ public class ItensDeTrabalho {
     private String descricao;
     private String responsavel;
     private boolean finalizado;
+
     public ItensDeTrabalho() {
 
     }

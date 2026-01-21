@@ -66,7 +66,7 @@ public class NewTrabalhoController implements Observer {
     }
 
     public void irParaTelaTrabalhos(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/ufc/br/view/TrabalhosView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ufc/br/view/UserView.fxml"));
 
         // Identifica a janela atual (Stage)
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

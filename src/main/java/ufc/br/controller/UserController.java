@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import ufc.br.model.Model;
 import ufc.br.model.Observer;
 import ufc.br.view.UserView;
+
 import java.io.IOException;
 
 public class UserController implements Observer {
@@ -19,7 +20,7 @@ public class UserController implements Observer {
 
     @FXML
     public void irParaListaTrabalhos(ActionEvent event) throws IOException {
-         //Verifica se há trabalhos antes de mudar de tela
+        //Verifica se há trabalhos antes de mudar de tela
         if (model.getListaTrabalhos(model.getUsuarioAutenticado()) != null &&
                 !model.getListaTrabalhos(model.getUsuarioAutenticado()).isEmpty()) {
 
@@ -31,8 +32,8 @@ public class UserController implements Observer {
             alert.setHeaderText(null);
             alert.setContentText("Ainda não há trabalhos cadastrados!");
             alert.showAndWait();
+            irParaNovoTrabalho(event);
         }
-        navegar(event, "/ufc/br/view/TrabalhosView.fxml");
     }
 
     @FXML
